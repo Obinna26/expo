@@ -135,6 +135,9 @@ export async function createSpecFromPodspecAsync(
         // MODULEMAP_FILE: 'JSI/module.modulemap',
         BUILD_LIBRARY_FOR_DISTRIBUTION: 'YES',
         SWIFT_INSTALL_MODULE: 'YES',
+
+        // If the Swift/C++ interop is enabled, the Objective-C header is in C++
+        // that libraries without the interop enabled don't understand.
         SWIFT_INSTALL_OBJC_HEADER: 'NO',
 
         // Suppresses deprecation warnings coming from frameworks like OpenGLES.

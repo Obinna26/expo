@@ -6,8 +6,6 @@ import ExpoModulesCoreJSI
  The base class for any type of the typed array.
  */
 public class TypedArray: AnyTypedArray {
-  public typealias ContentType = UInt8
-
   /**
    Creates a concrete TypedArray from the given JavaScriptTypedArray
    */
@@ -80,48 +78,5 @@ public class TypedArray: AnyTypedArray {
    */
   required init(_ jsTypedArray: JavaScriptTypedArray) {
     self.jsTypedArray = jsTypedArray
-  }
-
-  /**
-   The unsafe mutable typed buffer that shares the same memory as the underlying JavaScript `ArrayBuffer`.
-   */
-  lazy var buffer = UnsafeMutableBufferPointer<ContentType>(start: pointer, count: length)
-
-  /**
-   The unsafe mutable typed pointer to the start of the array buffer.
-   */
-  lazy var pointer = rawPointer.bindMemory(to: ContentType.self, capacity: length)
-
-  public subscript(index: Int) -> ContentType {
-    get {
-      return buffer[index]
-    }
-    set {
-      buffer[index] = newValue
-    }
-  }
-
-  subscript(range: Range<Int>) -> [ContentType] {
-    get {
-      return Array(buffer[range])
-    }
-    set {
-      var newValues = newValue
-      newValues.withUnsafeMutableBufferPointer { newValuesBuffer in
-        buffer[range] = newValuesBuffer[0..<(range.upperBound - range.lowerBound)]
-      }
-    }
-  }
-
-  subscript(range: ClosedRange<Int>) -> [ContentType] {
-    get {
-      return Array(buffer[range])
-    }
-    set {
-      var newValues = newValue
-      newValues.withUnsafeMutableBufferPointer { newValuesBuffer in
-        buffer[range] = newValuesBuffer[0...(range.upperBound - range.lowerBound)]
-      }
-    }
   }
 }

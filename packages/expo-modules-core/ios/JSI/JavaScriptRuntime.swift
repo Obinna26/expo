@@ -6,7 +6,6 @@
 public typealias RCTPromiseResolveBlock = (_ result: Any) -> Void
 public typealias RCTPromiseRejectBlock = (_ code: String?, _ message: String?, _ error: NSError?) -> Void
 
-@objc(EXJavaScriptRuntime)
 open class JavaScriptRuntime: NSObject {
   /**
 

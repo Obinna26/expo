@@ -182,7 +182,7 @@ public final class SharedObjectRegistry {
   }
 
   internal func clear() {
-    Self.lockQueue.sync {
+    Self.lockQueue.async {
       self.pairs.removeAll()
     }
   }

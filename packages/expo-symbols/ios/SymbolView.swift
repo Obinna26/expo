@@ -1,4 +1,4 @@
-@_implementationOnly import ExpoModulesCore
+import ExpoModulesCore
 
 class SymbolView: ExpoView {
   let imageView = UIImageView()

@@ -1,7 +1,7 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
 import ExpoModulesCore
-@_implementationOnly import React
+import React
 
 #if DEBUG && EX_DEV_CLIENT_NETWORK_INSPECTOR
 

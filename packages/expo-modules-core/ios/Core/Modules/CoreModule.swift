@@ -1,6 +1,6 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
-@_implementationOnly import React
+import React
 
 // The core module that describes the `global.expo` object.
 internal final class CoreModule: Module {

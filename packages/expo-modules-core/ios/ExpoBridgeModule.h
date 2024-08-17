@@ -4,13 +4,13 @@
 #import <ExpoModulesCore/EXNativeModulesProxy.h>
 #import <ExpoModulesCore/EXModuleRegistry.h>
 
-@class AppContext;
+@class EXAppContext;
 
 @interface ExpoBridgeModule : NSObject <RCTBridgeModule>
 
-@property (nonatomic, nullable, strong) AppContext *appContext;
+@property (nonatomic, nullable, strong) EXAppContext *appContext;
 
-- (nonnull instancetype)initWithAppContext:(nonnull AppContext *) appContext;
+- (nonnull instancetype)initWithAppContext:(nonnull EXAppContext *) appContext;
 
 - (void)legacyProxyDidSetBridge:(nonnull EXNativeModulesProxy *)moduleProxy
            legacyModuleRegistry:(nonnull EXModuleRegistry *)moduleRegistry;

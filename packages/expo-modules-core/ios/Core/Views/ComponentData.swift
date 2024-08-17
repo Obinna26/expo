@@ -1,6 +1,6 @@
 // Copyright 2021-present 650 Industries. All rights reserved.
 
-@_implementationOnly import React
+import React
 
 /**
  Custom component data extending `RCTComponentData`. Its main purpose is to handle event-based props (callbacks),

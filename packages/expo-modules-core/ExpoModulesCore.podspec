@@ -42,9 +42,9 @@ Pod::Spec.new do |s|
     'USE_HEADERMAP' => 'YES',
     'DEFINES_MODULE' => 'YES',
     'CLANG_CXX_LANGUAGE_STANDARD' => 'c++20',
-    # 'SWIFT_OBJC_INTEROP_MODE' => 'objcxx',
+    'SWIFT_COMPILATION_MODE' => 'wholemodule',
     'HEADER_SEARCH_PATHS' => header_search_paths.join(' '),
-    'OTHER_SWIFT_FLAGS' => "$(inherited) #{fabric_enabled ? fabric_compiler_flags : ''} -Xcc -D -Xcc FOLLY_NO_CONFIG -Xcc -D -Xcc FOLLY_MOBILE=1 -Xcc -D -Xcc FOLLY_USE_LIBCPP=1 -Xcc -D -Xcc FOLLY_CFG_NO_COROUTINES=1"
+    'OTHER_SWIFT_FLAGS' => "$(inherited) #{fabric_enabled ? fabric_compiler_flags : ''}"
   }
   user_header_search_paths = [
     '"${PODS_CONFIGURATION_BUILD_DIR}/ExpoModulesCore/Swift Compatibility Header"',
@@ -63,6 +63,10 @@ Pod::Spec.new do |s|
     s.dependency 'React-jsc'
   end
 
+  s.dependency 'React-Core'
+  s.dependency 'ReactCommon/turbomodule/core'
+  s.dependency 'React-RCTAppDelegate'
+  s.dependency 'React-NativeModulesApple'
   s.dependency 'ExpoModulesCoreJSI'
 
   if fabric_enabled
@@ -86,7 +90,7 @@ Pod::Spec.new do |s|
     s.source_files = 'ios/**/*.{h,m,mm,swift,cpp}', 'common/cpp/**/*.{h,cpp}'
   end
 
-  exclude_files = ['ios/Tests/', 'ios/JSI/', 'ios/JSI_dupa/']
+  exclude_files = ['ios/Tests/', 'ios/JSI/', 'ios/ExpoModulesCoreJSI.xcframework/']
   if !fabric_enabled
     exclude_files.append('ios/Fabric/')
     exclude_files.append('common/cpp/fabric/')

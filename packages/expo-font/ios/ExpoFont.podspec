@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
-    'DEFINES_MODULE' => 'YES',
+    'DEFINES_MODULE' => 'YES'
   }
 
   s.source_files = "**/*.{h,m,swift}"

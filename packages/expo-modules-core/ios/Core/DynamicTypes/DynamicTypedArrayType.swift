@@ -3,7 +3,7 @@
 import ExpoModulesCoreJSI
 
 internal struct DynamicTypedArrayType: AnyDynamicType {
-  let innerType: any AnyTypedArray.Type
+  let innerType: AnyTypedArray.Type
 
   func wraps<InnerType>(_ type: InnerType.Type) -> Bool {
     return innerType == InnerType.self

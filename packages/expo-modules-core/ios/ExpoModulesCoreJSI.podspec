@@ -83,7 +83,7 @@ Pod::Spec.new do |s|
   install_modules_dependencies(s)
 
   if !$ExpoUseSources&.include?(package['name']) && ENV['EXPO_USE_SOURCE'].to_i == 0 && File.exist?("#{s.name}.xcframework")
-    s.source_files = ['JSI/**/*.{h,hpp}']
+    # s.source_files = ['JSI/**/*.{h,hpp}']
     s.vendored_frameworks = "#{s.name}.xcframework"
   else
     pod_target_xcconfig['SWIFT_OBJC_INTEROP_MODE'] = 'objcxx'

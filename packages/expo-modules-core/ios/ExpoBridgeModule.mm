@@ -2,6 +2,7 @@
 
 #import <ReactCommon/RCTTurboModule.h>
 #import <ExpoModulesCore/ExpoBridgeModule.h>
+#import <ExpoModulesCore/Swift.h>
 
 // The runtime executor is included as of React Native 0.74 in bridgeless mode.
 #if __has_include(<ReactCommon/RCTRuntimeExecutor.h>)
@@ -17,18 +18,18 @@ RCT_EXPORT_MODULE(ExpoModulesCore);
 - (instancetype)init
 {
   if (self = [super init]) {
-//    _appContext = [[EXAppContext alloc] init];
+    _appContext = [[EXAppContext alloc] init];
   }
   return self;
 }
 
-//- (instancetype)initWithAppContext:(EXAppContext *) appContext
-//{
-//  if (self = [super init]) {
-//    _appContext = appContext;
-//  }
-//  return self;
-//}
+- (instancetype)initWithAppContext:(EXAppContext *) appContext
+{
+  if (self = [super init]) {
+    _appContext = appContext;
+  }
+  return self;
+}
 
 + (BOOL)requiresMainQueueSetup
 {
@@ -42,7 +43,7 @@ RCT_EXPORT_MODULE(ExpoModulesCore);
   // it's actually an instance of `RCTBridgeProxy` that provides backwards compatibility.
   // Also, hold on with initializing the runtime until `setRuntimeExecutor` is called.
   _bridge = bridge;
-//  _appContext.reactBridge = bridge;
+  _appContext.reactBridge = bridge;
 
 #if !__has_include(<ReactCommon/RCTRuntimeExecutor.h>)
   _appContext._runtime = [EXJavaScriptRuntimeManager runtimeFromBridge:bridge];
@@ -62,12 +63,12 @@ RCT_EXPORT_MODULE(ExpoModulesCore);
 - (void)legacyProxyDidSetBridge:(nonnull EXNativeModulesProxy *)moduleProxy
            legacyModuleRegistry:(nonnull EXModuleRegistry *)moduleRegistry
 {
-//  _appContext.legacyModulesProxy = moduleProxy;
-//  _appContext.legacyModuleRegistry = moduleRegistry;
-//
-//  // We need to register all the modules after the legacy module registry is set
-//  // otherwise legacy modules (e.g. permissions) won't be available in OnCreate { }
-//  [_appContext useModulesProvider:@"ExpoModulesProvider"];
+  _appContext.legacyModulesProxy = moduleProxy;
+  _appContext.legacyModuleRegistry = moduleRegistry;
+
+  // We need to register all the modules after the legacy module registry is set
+  // otherwise legacy modules (e.g. permissions) won't be available in OnCreate { }
+  [_appContext useModulesProvider:@"ExpoModulesProvider"];
 }
 
 /**
@@ -76,11 +77,11 @@ RCT_EXPORT_MODULE(ExpoModulesCore);
  */
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(installModules)
 {
-//  if (_bridge && !_appContext._runtime) {
-//    // TODO: Keep this condition until we remove the other way of installing modules.
-//    // See `setBridge` method above.
+  if (_bridge && !_appContext._runtime) {
+    // TODO: Keep this condition until we remove the other way of installing modules.
+    // See `setBridge` method above.
 //    _appContext._runtime = [EXJavaScriptRuntimeManager runtimeFromBridge:_bridge];
-//  }
+  }
   return nil;
 }
 

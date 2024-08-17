@@ -1,4 +1,4 @@
-@_implementationOnly import React
+import React
 
 func DevMenuUIEdgeInsetsEqualToEdgeInsetsWithThreshold(_ insets1: UIEdgeInsets, _ insets2: UIEdgeInsets, _ threshold: CGFloat) -> Bool {
   return abs(insets1.left - insets2.left) <= threshold &&

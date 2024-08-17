@@ -2,7 +2,7 @@
 
 import ExpoModulesCore
 import SafariServices
-@_implementationOnly import React
+import React
 
 public class DevMenuInternalModule: Module {
   public func definition() -> ModuleDefinition {

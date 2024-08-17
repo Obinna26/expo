@@ -11,11 +11,11 @@
 #else
 #import <EXDevMenuInterface-Swift.h>
 #endif
-//#if __has_include(<ExpoModulesCore/ExpoModulesCore-Swift.h>)
-//#import <ExpoModulesCore/ExpoModulesCore-Swift.h>
-//#else
-//#import <ExpoModulesCore-Swift.h>
-//#endif
+#if __has_include(<ExpoModulesCore/ExpoModulesCore-Swift.h>)
+#import <ExpoModulesCore/ExpoModulesCore-Swift.h>
+#else
+#import <ExpoModulesCore-Swift.h>
+#endif
 #if __has_include(<EXDevMenu/EXDevMenu-Swift.h>)
 #import <EXDevMenu/EXDevMenu-Swift.h>
 #else

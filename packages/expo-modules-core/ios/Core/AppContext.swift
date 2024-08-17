@@ -1,15 +1,15 @@
-@_implementationOnly import React
+import React
 import ExpoModulesCoreJSI
 
 /**
  The app context is an interface to a single Expo app.
  */
-@objc
+@objc(EXAppContext)
 public final class AppContext: NSObject {
   internal static func create() -> AppContext {
     let appContext = AppContext()
 
-    appContext._runtime = ExpoRuntime()
+    appContext._runtime = JavaScriptRuntime()
     return appContext
   }
 
@@ -52,7 +52,7 @@ public final class AppContext: NSObject {
    Underlying JSI runtime of the running app.
    */
   @objc
-  public var _runtime: ExpoRuntime? {
+  public var _runtime: JavaScriptRuntime? {
     didSet {
       if _runtime == nil {
         // When the runtime is unpinned from the context (e.g. deallocated),
@@ -69,7 +69,7 @@ public final class AppContext: NSObject {
   /**
    JSI runtime of the running app.
    */
-  public var runtime: ExpoRuntime {
+  public var runtime: JavaScriptRuntime {
     get throws {
       if let runtime = _runtime {
         return runtime
@@ -298,7 +298,7 @@ public final class AppContext: NSObject {
    Returns a JavaScript object that represents a module with given name.
    When remote debugging is enabled, this will always return `nil`.
    */
-  @objc
+//  @objc
   public func getNativeModuleObject(_ moduleName: String) -> JavaScriptObject? {
     return moduleRegistry.get(moduleHolderForName: moduleName)?.javaScriptObject
   }
@@ -395,7 +395,7 @@ public final class AppContext: NSObject {
     try coreModuleHolder.definition.decorate(object: coreObject, appContext: self)
 
     // Initialize `global.expo`.
-    try runtime.initializeCoreObject(coreObject)
+//    try runtime.initializeCoreObject(coreObject)
 
     // Install `global.expo.EventEmitter`.
 //    EXJavaScriptRuntimeManager.installEventEmitterClass(runtime)

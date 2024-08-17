@@ -1,6 +1,6 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
-@_implementationOnly import React
+import React
 import EXDevMenuInterface
 import EXManifests
 import CoreGraphics

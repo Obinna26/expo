@@ -1,4 +1,4 @@
-@_implementationOnly import ExpoModulesCore
+import ExpoModulesCore
 
 public final class SharingModule: Module {
 

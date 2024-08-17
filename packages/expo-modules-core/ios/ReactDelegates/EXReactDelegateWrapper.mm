@@ -2,43 +2,41 @@
 
 #import <ExpoModulesCore/EXReactDelegateWrapper.h>
 #import <ExpoModulesCore/EXReactDelegateWrapper+Private.h>
+#import <ExpoModulesCore/Swift.h>
 
 @interface EXReactDelegateWrapper()
 
-//@property (nonatomic, weak) EXReactDelegate *expoReactDelegate;
+@property (nonatomic, weak) EXReactDelegate *expoReactDelegate;
 
 @end
 
 @implementation EXReactDelegateWrapper
 
-//- (instancetype)initWithExpoReactDelegate:(EXReactDelegate *)expoReactDelegate
-//{
-//  if (self = [super init]) {
-//    _expoReactDelegate = expoReactDelegate;
-//  }
-//  return self;
-//}
+- (instancetype)initWithExpoReactDelegate:(EXReactDelegate *)expoReactDelegate
+{
+  if (self = [super init]) {
+    _expoReactDelegate = expoReactDelegate;
+  }
+  return self;
+}
 
 - (UIView *)createReactRootView:(NSString *)moduleName
               initialProperties:(nullable NSDictionary *)initialProperties
                   launchOptions:(nullable NSDictionary *)launchOptions
 {
-  return nil;
-//  return [_expoReactDelegate createReactRootViewWithModuleName:moduleName
-//                                             initialProperties:initialProperties
-//                                                 launchOptions:launchOptions];
+  return [_expoReactDelegate createReactRootViewWithModuleName:moduleName
+                                             initialProperties:initialProperties
+                                                 launchOptions:launchOptions];
 }
 
 - (NSURL *)bundleURL
 {
-  return nil;
-//  return [_expoReactDelegate bundleURL];
+  return [_expoReactDelegate bundleURL];
 }
 
 - (UIViewController *)createRootViewController
 {
-  return nil;
-//  return [_expoReactDelegate createRootViewController];
+  return [_expoReactDelegate createRootViewController];
 }
 
 @end

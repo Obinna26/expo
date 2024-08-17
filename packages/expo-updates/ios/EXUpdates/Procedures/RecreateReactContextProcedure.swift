@@ -1,6 +1,6 @@
 //  Copyright © 2019 650 Industries. All rights reserved.
 
-@_implementationOnly import React
+import React
 import ExpoModulesCore
 
 final class RecreateReactContextProcedure: StateMachineProcedure {

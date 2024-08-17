@@ -2,8 +2,7 @@
 
 //@_implementationOnly import ExpoModulesCoreCxx
 
-@objc
-public class JavaScriptWeakObject: NSObject {
+public class JavaScriptWeakObject {
   internal weak var _runtime: JavaScriptRuntime?
 
   internal var runtime: JavaScriptRuntime {

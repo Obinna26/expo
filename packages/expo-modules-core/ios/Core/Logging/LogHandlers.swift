@@ -25,14 +25,14 @@ public protocol LogHandler {
  */
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 internal class OSLogHandler: LogHandler {
-//  private let osLogger: os.Logger
+  private let osLogger: os.Logger
 
   required init(category: String) {
-//    osLogger = os.Logger(subsystem: Logger.EXPO_MODULES_LOG_SUBSYSTEM, category: category)
+    osLogger = os.Logger(subsystem: Logger.EXPO_MODULES_LOG_SUBSYSTEM, category: category)
   }
 
   func log(type: LogType, _ message: String) {
-//    osLogger.log(level: type.toOSLogType(), "\(message)")
+    osLogger.log(level: type.toOSLogType(), "\(message)")
   }
 }
 

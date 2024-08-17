@@ -1,4 +1,4 @@
-@_implementationOnly import React
+import React
 
 public protocol AnyExpoView: RCTView {
   var appContext: AppContext? { get }

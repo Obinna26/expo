@@ -1,4 +1,4 @@
-@_implementationOnly import ExpoModulesCore
+import ExpoModulesCore
 
 internal struct SharingOptions: Record {
   @Field var mimeType: String?

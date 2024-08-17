@@ -1,6 +1,6 @@
 // Copyright 2018-present 650 Industries. All rights reserved.
 
-//#import <ExpoModulesCore/Swift.h>
+#import <ExpoModulesCore/Swift.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface EXReactDelegateWrapper(Private)
 
-//- (instancetype)initWithExpoReactDelegate:(EXReactDelegate *)expoReactDelegate;
+- (instancetype)initWithExpoReactDelegate:(EXReactDelegate *)expoReactDelegate;
 
 @end
 

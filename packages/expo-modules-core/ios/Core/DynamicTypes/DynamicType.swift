@@ -32,7 +32,7 @@ private func DynamicType<T>(_ type: T.Type) -> AnyDynamicType {
   if let SharedObjectType = T.self as? SharedObject.Type {
     return DynamicSharedObjectType(innerType: SharedObjectType)
   }
-  if let TypedArrayType = T.self as? any AnyTypedArray.Type {
+  if let TypedArrayType = T.self as? AnyTypedArray.Type {
     return DynamicTypedArrayType(innerType: TypedArrayType)
   }
   if let DataType = T.self as? Data.Type {

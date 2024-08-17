@@ -24,10 +24,6 @@ Pod::Spec.new do |s|
   s.dependency 'Quick', '~> 7.3.0'
   s.dependency 'Nimble', '~> 13.0.0'
 
-  s.pod_target_xcconfig = {
-    'DEFINES_MODULE' => 'YES',
-  }
-
   # react_native_pods.rb will add the ENV['USE_HERMES'],
   # we could use this to check current js runtime.
   if ENV['USE_HERMES'] == '0'

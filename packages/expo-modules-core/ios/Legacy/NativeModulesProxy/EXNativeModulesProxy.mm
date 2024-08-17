@@ -19,7 +19,7 @@
 #import <ExpoModulesCore/EXModuleRegistryProvider.h>
 #import <ExpoModulesCore/EXReactNativeEventEmitter.h>
 #import <ExpoModulesCore/EXJSIInstaller.h>
-//#import <ExpoModulesCore/Swift.h>
+#import <ExpoModulesCore/Swift.h>
 
 static const NSString *exportedMethodsNamesKeyPath = @"exportedMethods";
 static const NSString *viewManagersMetadataKeyPath = @"viewManagersMetadata";
@@ -93,7 +93,7 @@ static const NSString *methodInfoArgumentsCountKey = @"argumentsCount";
 @end
 
 @implementation EXNativeModulesProxy {
-//  __weak AppContext * _Nullable _appContext;
+  __weak EXAppContext * _Nullable _appContext;
 }
 
 @synthesize bridge = _bridge;
@@ -179,7 +179,7 @@ RCT_EXPORT_MODULE(NativeUnimoduleProxy)
                                                                      methodNames:exportedMethodsNamesAccumulator
                                                                     viewManagers:[NSMutableDictionary new]];
   // decorate legacy config with sweet expo-modules config
-//  [config addEntriesFromConfig:[_appContext expoModulesConfig]];
+  [config addEntriesFromConfig:[_appContext expoModulesConfig]];
   
   _nativeModulesConfig = config;
   return config;
@@ -192,10 +192,10 @@ RCT_EXPORT_MODULE(NativeUnimoduleProxy)
 
 - (void)setBridge:(RCTBridge *)bridge
 {
-//  ExpoBridgeModule *expoBridgeModule = [bridge moduleForClass:ExpoBridgeModule.class];
-//  [expoBridgeModule legacyProxyDidSetBridge:self legacyModuleRegistry:_exModuleRegistry];
-//
-//  _appContext = [expoBridgeModule appContext];
+  ExpoBridgeModule *expoBridgeModule = [bridge moduleForClass:ExpoBridgeModule.class];
+  [expoBridgeModule legacyProxyDidSetBridge:self legacyModuleRegistry:_exModuleRegistry];
+
+  _appContext = [expoBridgeModule appContext];
 
   if (!_bridge) {
     // The `setBridge` can be called during module setup or after. Registering more modules
@@ -215,10 +215,10 @@ RCT_EXPORT_MODULE(NativeUnimoduleProxy)
 RCT_EXPORT_METHOD(callMethod:(NSString *)moduleName methodNameOrKey:(id)methodNameOrKey arguments:(NSArray *)arguments resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
   // Backwards compatibility for the new architecture
-//  if ([_appContext hasModule:moduleName]) {
-//    [_appContext callFunction:methodNameOrKey onModule:moduleName withArgs:arguments resolve:resolve reject:reject];
-//    return;
-//  }
+  if ([_appContext hasModule:moduleName]) {
+    [_appContext callFunction:methodNameOrKey onModule:moduleName withArgs:arguments resolve:resolve reject:reject];
+    return;
+  }
 
   EXExportedModule *module = [_exModuleRegistry getExportedModuleForName:moduleName];
   if (module == nil) {
@@ -265,14 +265,14 @@ RCT_EXPORT_METHOD(callMethod:(NSString *)moduleName methodNameOrKey:(id)methodNa
   NSMutableSet *visitedSweetModules = [NSMutableSet new];
 
   // Add dynamic wrappers for view modules written in Sweet API.
-//  for (ViewModuleWrapper *swiftViewModule in [_appContext getViewManagers]) {
-//    Class wrappedViewModuleClass = [self registerComponentData:swiftViewModule inBridge:bridge];
-//    [additionalModuleClasses addObject:wrappedViewModuleClass];
-//    [visitedSweetModules addObject:swiftViewModule.name];
-//  }
+  for (ViewModuleWrapper *swiftViewModule in [_appContext getViewManagers]) {
+    Class wrappedViewModuleClass = [self registerComponentData:swiftViewModule inBridge:bridge];
+    [additionalModuleClasses addObject:wrappedViewModuleClass];
+    [visitedSweetModules addObject:swiftViewModule.name];
+  }
 
-//  [additionalModuleClasses addObject:[ViewModuleWrapper class]];
-//  [self registerLegacyComponentData:[ViewModuleWrapper class] inBridge:bridge];
+  [additionalModuleClasses addObject:[ViewModuleWrapper class]];
+  [self registerLegacyComponentData:[ViewModuleWrapper class] inBridge:bridge];
 
   // Add modules from legacy module registry only when the NativeModulesProxy owns the registry.
   if (ownsModuleRegistry) {
@@ -294,7 +294,7 @@ RCT_EXPORT_METHOD(callMethod:(NSString *)moduleName methodNameOrKey:(id)methodNa
 
   // Get the instance of `EXReactEventEmitter` bridge module and give it access to the interop bridge.
   EXReactNativeEventEmitter *eventEmitter = [bridge moduleForClass:[EXReactNativeEventEmitter class]];
-//  [eventEmitter setAppContext:_appContext];
+  [eventEmitter setAppContext:_appContext];
 
   // As the last step, when the registry is owned,
   // register the event emitter and initialize the registry.
@@ -333,31 +333,31 @@ RCT_EXPORT_METHOD(callMethod:(NSString *)moduleName methodNameOrKey:(id)methodNa
   [bridge registerAdditionalModuleClasses:moduleClasses];
 }
 
-//- (Class)registerComponentData:(ViewModuleWrapper *)viewModule inBridge:(RCTBridge *)bridge
-//{
-//  // Hacky way to get a dictionary with `RCTComponentData` from UIManager.
-//  NSMutableDictionary<NSString *, RCTComponentData *> *componentDataByName = [[bridge uiManager] valueForKey:@"_componentDataByName"];
-//
-//  Class wrappedViewModuleClass = [ViewModuleWrapper createViewModuleWrapperClassWithModule:viewModule];
-//  NSString *className = NSStringFromClass(wrappedViewModuleClass);
-//
-//  if (componentDataByName[className]) {
-//    // Just in case the component was already registered, let's leave a log that we're overriding it.
-//    NSLog(@"Overriding ComponentData for view %@", className);
-//  }
-//
-//  EXComponentData *componentData = [[EXComponentData alloc] initWithViewModule:viewModule
-//                                                                  managerClass:wrappedViewModuleClass
-//                                                                        bridge:bridge];
-//  componentDataByName[className] = componentData;
-//
-//#ifdef RN_FABRIC_ENABLED
-//  Class viewClass = [ExpoFabricView makeViewClassForAppContext:_appContext className:className];
-//  [[RCTComponentViewFactory currentComponentViewFactory] registerComponentViewClass:viewClass];
-//#endif
-//
-//  return wrappedViewModuleClass;
-//}
+- (Class)registerComponentData:(ViewModuleWrapper *)viewModule inBridge:(RCTBridge *)bridge
+{
+  // Hacky way to get a dictionary with `RCTComponentData` from UIManager.
+  NSMutableDictionary<NSString *, RCTComponentData *> *componentDataByName = [[bridge uiManager] valueForKey:@"_componentDataByName"];
+
+  Class wrappedViewModuleClass = [ViewModuleWrapper createViewModuleWrapperClassWithModule:viewModule];
+  NSString *className = NSStringFromClass(wrappedViewModuleClass);
+
+  if (componentDataByName[className]) {
+    // Just in case the component was already registered, let's leave a log that we're overriding it.
+    NSLog(@"Overriding ComponentData for view %@", className);
+  }
+
+  EXComponentData *componentData = [[EXComponentData alloc] initWithViewModule:viewModule
+                                                                  managerClass:wrappedViewModuleClass
+                                                                        bridge:bridge];
+  componentDataByName[className] = componentData;
+
+#ifdef RN_FABRIC_ENABLED
+  Class viewClass = [ExpoFabricView makeViewClassForAppContext:_appContext className:className];
+  [[RCTComponentViewFactory currentComponentViewFactory] registerComponentViewClass:viewClass];
+#endif
+
+  return wrappedViewModuleClass;
+}
 
 /**
  Bridge's `registerAdditionalModuleClasses:` method doesn't register

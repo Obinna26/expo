@@ -1,6 +1,6 @@
 // Copyright 2022-present 650 Industries. All rights reserved.
 
-@_implementationOnly import React
+import React
 
 #if RN_FABRIC_ENABLED
 public typealias ExpoView = ExpoFabricView

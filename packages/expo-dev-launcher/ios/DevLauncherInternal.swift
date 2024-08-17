@@ -1,6 +1,6 @@
 import ExpoModulesCore
 import EXDevMenu
-@_implementationOnly import React
+import React
 
 private let LAUNCHER_NAVIGATION_STATE_KEY = "expo.modules.devlauncher.navigation-state"
 private let ON_NEW_DEEP_LINK_EVENT = "expo.modules.devlauncher.onnewdeeplink"

@@ -111,7 +111,6 @@
 		EF79B95AA101B54E17227086 /* JavaScriptWeakObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptWeakObject.swift; sourceTree = "<group>"; };
 		EFE60A8DF957F1C8562DEAC5 /* JSIUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSIUtils.h; sourceTree = "<group>"; };
 		F3DA6D3E363FAB116488C7B6 /* EventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventEmitter.h; sourceTree = "<group>"; };
-		FA5B212C74262FB23B9FC042 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -119,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				4D687D40E15E4146627E0FCC /* JSI */,
-				D9C717F2A8B2345D9295A2B6 /* JSI_dupa */,
 				EB018870A864F18335E1426B /* Frameworks */,
 				AA26E0A08A322C5A04027122 /* Products */,
 			);
@@ -167,14 +165,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D9C717F2A8B2345D9295A2B6 /* JSI_dupa */ = {
-			isa = PBXGroup;
-			children = (
-				FA5B212C74262FB23B9FC042 /* module.modulemap */,
-			);
-			path = JSI_dupa;
-			sourceTree = "<group>";
-		};
 		EB018870A864F18335E1426B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,10 +173,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		"TEMP_120B2C53-C2B0-4488-8EC3-2FCF31A8DDAC" /* ExpoModulesCoreJSI */ = {
+		"TEMP_68E7EDC1-B096-4955-BC0C-8E60D82F27C1" /* ExpoModulesCoreJSI */ = {
 			isa = PBXGroup;
 			children = (
-				D9C717F2A8B2345D9295A2B6 /* JSI_dupa */,
 				4D687D40E15E4146627E0FCC /* JSI */,
 			);
 			name = ExpoModulesCoreJSI;

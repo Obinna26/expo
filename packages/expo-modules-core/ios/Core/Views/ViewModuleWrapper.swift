@@ -1,5 +1,5 @@
 import ObjectiveC
-@_implementationOnly import React
+import React
 
 /**
  A protocol that helps in identifying whether the instance of `ViewModuleWrapper` is of a dynamically created class.

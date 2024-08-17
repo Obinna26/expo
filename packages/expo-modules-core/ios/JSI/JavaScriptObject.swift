@@ -2,8 +2,7 @@
 
 //@_implementationOnly import ExpoModulesCoreCxx
 
-@objc
-public class JavaScriptObject: NSObject {
+public class JavaScriptObject {
   internal weak var _runtime: JavaScriptRuntime?
   internal var ptr: expo.ObjectSharedPtr
 

@@ -6,8 +6,6 @@ import ExpoModulesCoreJSI
  A protocol for all typed arrays.
  */
 internal protocol AnyTypedArray: AnyArgument {
-  associatedtype ContentType: Numeric
-
   /**
    Initializes a typed array from the given JavaScript representation.
    */

@@ -16,7 +16,6 @@ public enum TypedArrayKind: Int32 {
   case BigUint64Array = 11
 }
 
-@objc
 public class JavaScriptTypedArray: JavaScriptObject {
   let typedArray: expo.TypedArray
   public let kind: TypedArrayKind

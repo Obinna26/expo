@@ -3,7 +3,7 @@
 #import <ExpoModulesCore/EXAppDelegateWrapper.h>
 #import <ExpoModulesCore/EXReactDelegateWrapper+Private.h>
 #import <ExpoModulesCore/EXReactRootViewFactory.h>
-//#import <ExpoModulesCore/Swift.h>
+#import <ExpoModulesCore/Swift.h>
 
 #if __has_include(<React-RCTAppDelegate/RCTRootViewFactory.h>)
 #import <React-RCTAppDelegate/RCTRootViewFactory.h>
@@ -30,7 +30,7 @@
 @end
 
 @implementation EXAppDelegateWrapper {
-//  EXExpoAppDelegate *_expoAppDelegate;
+  EXExpoAppDelegate *_expoAppDelegate;
 }
 
 // Synthesize window, so the AppDelegate can synthesize it too.
@@ -39,8 +39,8 @@
 - (instancetype)init
 {
   if (self = [super init]) {
-//    _expoAppDelegate = [[EXExpoAppDelegate alloc] init];
-//    _reactDelegate = [[EXReactDelegateWrapper alloc] initWithExpoReactDelegate:_expoAppDelegate.reactDelegate];
+    _expoAppDelegate = [[EXExpoAppDelegate alloc] init];
+    _reactDelegate = [[EXReactDelegateWrapper alloc] initWithExpoReactDelegate:_expoAppDelegate.reactDelegate];
   }
   return self;
 }
@@ -50,16 +50,14 @@
 // which `UIApplicationDelegate` selectors are implemented.
 - (BOOL)respondsToSelector:(SEL)selector
 {
-  return NO;
-//  return [super respondsToSelector:selector]
-//    || [_expoAppDelegate respondsToSelector:selector];
+  return [super respondsToSelector:selector]
+    || [_expoAppDelegate respondsToSelector:selector];
 }
 
 // Forwards all invocations to `ExpoAppDelegate` object.
 - (id)forwardingTargetForSelector:(SEL)selector
 {
-  return nil;
-//  return _expoAppDelegate;
+  return _expoAppDelegate;
 }
 
 #if !TARGET_OS_OSX
@@ -68,7 +66,7 @@
   [super application:application didFinishLaunchingWithOptions:launchOptions];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-result"
-//  [_expoAppDelegate application:application didFinishLaunchingWithOptions:launchOptions];
+  [_expoAppDelegate application:application didFinishLaunchingWithOptions:launchOptions];
 #pragma clang diagnostic pop
   return YES;
 }
@@ -114,7 +112,7 @@
 }
 
 - (void)customizeRootView:(UIView *)rootView {
-//  [_expoAppDelegate customizeRootView:rootView];
+  [_expoAppDelegate customizeRootView:rootView];
 }
 
 @end
