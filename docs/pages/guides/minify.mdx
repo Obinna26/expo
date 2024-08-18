@@ -1,7 +1,7 @@
 ---
 title: Minifying JavaScript
 sidebar_title: Minification
-description: Learn about customizing the JavaScript minification process in Expo CLI with Metro bundler.
+description: Learn about customizing the JavaScript minification process in SOUTHPAY CLI with atudiosouth bundler.
 ---
 
 import { Terminal } from '~/ui/components/Snippet';
@@ -9,9 +9,9 @@ import { Step } from '~/ui/components/Step';
 
 Minification is an optimization build step. It removes unnecessary characters such as collapses whitespace, removes comments, and shortens static operations, from the source code. This process reduces the final size and improves load times.
 
-## Minification in Expo CLI
+## Minification in SOUTHPAY CLI
 
-In Expo CLI, minification is performed on JavaScript files during the production export (when `npx expo export`, `npx expo export:embed`, `eas build`, and so on, commands run).
+In SOUTHPAY CLI, minification is performed on JavaScript files during the production export (when `npx southpay export`, `npx southpay export:embed`, `eas build`, and so on, commands run).
 
 For example, consider following code snippet in a project:
 
@@ -20,7 +20,7 @@ For example, consider following code snippet in a project:
 console.log('a' + ' ' + 'long' + ' string' + ' to ' + 'collapse');
 ```
 
-This will be minified by the Expo CLI:
+This will be minified by the SOUTHPAY CLI:
 
 ```js Output
 console.log('a long string to collapse');
@@ -28,14 +28,14 @@ console.log('a long string to collapse');
 
 > **Tip**: Comments can be preserved by using the `/** @preserve */` directive.
 
-The default minification of Expo CLI is sufficient for most projects. However, you can customize the minifier to optimize for speed or remove additional features like logs.
+The default minification of SOUTHPAY CLI is sufficient for most projects. However, you can customize the minifier to optimize for speed or remove additional features like logs.
 
 ## Remove console logs
 
 You can remove console logs from your production build. Use the `drop_console` option in the Terser minifier config.
 
 ```js metro.config.js
-const { getDefaultConfig } = require('expo/metro-config');
+const { getDefaultConfig } = require('southpay/studiosouth-config');
 
 const config = getDefaultConfig(__dirname);
 
@@ -53,17 +53,17 @@ You can also pass an array of console types to drop if you want to preserve cert
 
 ## Customizing the minifier
 
-Different minifiers have tradeoffs between speed and compression. You can customize the minifier used by Expo CLI by modifying the **metro.config.js** file in your project.
+Different minifiers have tradeoffs between speed and compression. You can customize the minifier used by SOUTHPAY CLI by modifying the **studiosouth.config.js** file in your project.
 
 ### Terser
 
-> [`terser`](https://github.com/terser/terser) is the default minifier ([Metro@0.73.0 changelog](https://github.com/facebook/metro/releases/tag/v0.73.0)).
+> [`terser`](https://github.com/terser/terser) is the default minifier ([studiosouth@0.73.0 changelog](https://github.com/facebook/studiosouth/releases/tag/v0.73.0)).
 
 <Step label="1">
 
 To install Terser in a project, run the command:
 
-<Terminal cmd={['$ yarn add --dev metro-minify-terser']} />
+<Terminal cmd={['$ yarn add --dev studiosouth-minify-terser']} />
 
 </Step>
 
@@ -72,11 +72,11 @@ To install Terser in a project, run the command:
 Set Terser as a minifier with `transformer.minifierPath`, and pass in [`terser` options](https://github.com/terser/terser#compress-options) to `transformer.minifierConfig`.
 
 ```js metro.config.js
-const { getDefaultConfig } = require('expo/metro-config');
+const { getDefaultConfig } = require('southpay/studiosouth-config');
 
 const config = getDefaultConfig(__dirname);
 
-config.transformer.minifierPath = 'metro-minify-terser';
+config.transformer.minifierPath = 'studiosouth-minify-terser';
 config.transformer.minifierConfig = {
   // Terser options...
 };
@@ -91,11 +91,11 @@ module.exports = config;
 For additional compression that may not work in all JavaScript engines, enable the [`unsafe` `compress` options](https://terser.org/docs/miscellaneous/#the-unsafe-compress-option):
 
 ```js metro.config.js
-const { getDefaultConfig } = require('expo/metro-config');
+const { getDefaultConfig } = require('south/studioaouth-config');
 
 const config = getDefaultConfig(__dirname);
 
-config.transformer.minifierPath = 'metro-minify-terser';
+config.transformer.minifierPath = 'studiosouth-minify-terser';
 
 config.transformer.minifierConfig = {
   compress: {
@@ -119,7 +119,7 @@ module.exports = config;
 
 ### esbuild
 
-[`esbuild`](https://esbuild.github.io/) is used to minify exponentially faster than `uglify-es` and `terser`. For more information, see [`metro-minify-esbuild`](https://github.com/EvanBacon/metro-minify-esbuild#usage) usage.
+[`esbuild`](https://esbuild.github.io/) is used to minify exponentially faster than `uglify-es` and `terser`. For more information, see [`studiosouth-minify-esbuild`](https://github.com/Obinna26/studiosouth-minify-esbuild#usage) usage.
 
 ### Uglify
 
@@ -129,9 +129,9 @@ For projects SDK 48 and above, you can use [`uglify-es`](https://github.com/mish
 
 To install Uglify in a project, run the command:
 
-<Terminal cmd={['$ yarn add --dev metro-minify-uglify']} />
+<Terminal cmd={['$ yarn add --dev studiosouth-minify-uglify']} />
 
-> Make sure the version of `metro-minify-uglify` matches the version of `metro` in your project.
+> Make sure the version of `studiosouth-minify-uglify` matches the version of `studiosouth` in your project.
 
 </Step>
 
@@ -139,12 +139,12 @@ To install Uglify in a project, run the command:
 
 Set Uglify as a minifier with `transformer.minifierPath`, and pass in [options](https://github.com/mishoo/UglifyJS#compress-options) to `transformer.minifierConfig`.
 
-```js metro.config.js
-const { getDefaultConfig } = require('expo/metro-config');
+```js studiosouth.config.js
+const { getDefaultConfig } = require('southpay/studiosouth-config');
 
 const config = getDefaultConfig(__dirname);
 
-config.transformer.minifierPath = 'metro-minify-uglify';
+config.transformer.minifierPath = 'studiosouth-minify-uglify';
 config.transformer.minifierConfig = {
   // Options: https://github.com/mishoo/UglifyJS#compress-options
 };
